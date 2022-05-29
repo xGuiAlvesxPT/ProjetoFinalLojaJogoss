@@ -32,7 +32,7 @@
 
     <EditText
         android:id="@+id/editTextUtilizador"
-        android:layout_width="428dp"
+        android:layout_width="367dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
@@ -40,13 +40,14 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:autofillHints=""
+        android:drawableLeft="@drawable/ic_baseline_person_24"
         android:ems="10"
         android:gravity="left"
         android:hint="Utilizador"
         android:inputType="textShortMessage"
         android:minHeight="48dp"
         android:textColor="#FFFFFF"
-        android:textColorHint="#37474F"
+        android:textColorHint="#000000"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -54,18 +55,19 @@
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="432dp"
+        android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:drawableLeft="@drawable/ic_baseline_lock_open_24"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:textColorHint="#212121"
+        android:textColorHint="#000000"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -74,8 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="LOGIN"
-        android:textColor="#01579B"
+        android:textColor="#000000"
         app:backgroundTint="#7FE15F"
-        app:iconTint="#3349C8" />
+        app:iconTint="#000000" />
 
 </LinearLayout>
