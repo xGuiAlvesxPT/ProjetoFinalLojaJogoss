@@ -2,4 +2,10 @@
     <string name="app_name">ProjetoFinalLojaJogos</string>
     <string name="userObrigatorio">Username obrigatorio</string>
     <string name="passObrigatoria">Password obrigatoria</string>
+    <string name="gest_o_da_loja">GESTÃO DA LOJA</string>
+    <string name="utilizador">Utilizador</string>
+    <string name="funcionarios">Funcionarios</string>
+    <string name="clientes">Clientes</string>
+    <string name="jogos">Jogos</string>
+    <string name="vendas">Vendas</string>
 </resources>
