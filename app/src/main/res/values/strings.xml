@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProjetoFinalLojaJogos</string>
+    <string name="userObrigatorio">Username obrigatorio</string>
+    <string name="passObrigatoria">Password obrigatoria</string>
 </resources>
