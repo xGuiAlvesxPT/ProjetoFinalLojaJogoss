@@ -8,4 +8,8 @@
     <string name="clientes">Clientes</string>
     <string name="jogos">Jogos</string>
     <string name="vendas">Vendas</string>
+    <string name="clientess">Clientes</string>
+    <string name="funcionarioss">Funcionarios</string>
+    <string name="jogoss">Jogos</string>
+    <string name="vendass">Vendas</string>
 </resources>
