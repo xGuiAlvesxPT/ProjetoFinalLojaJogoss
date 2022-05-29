@@ -16,8 +16,11 @@ class BDLojaOpenHelper(
 
         requireNotNull(db)
 
-       // TabelaBDCategorias(db).cria()
-       // TabelaLivros(db).cria()
+       TabelaClientes(db).cria()
+       TabelaFuncionarios(db).cria()
+       TabelaVendas(db).cria()
+       TabelaJogos(db).cria()
+       TabelaLinhaVenda(db).cria() 
 
 
     }
