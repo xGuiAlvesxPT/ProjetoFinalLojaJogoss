@@ -3,11 +3,11 @@ import android.content.ContentValues
 import java.util.*
 
 data class Funcionario(
-    val id: Long,
     var nome: String,
     var nif: Int,
     var contacto: Int,
-    var data_de_nascimento: String
+    var data_de_nascimento: Long,
+    val id: Long = -1
 
 ) {
 

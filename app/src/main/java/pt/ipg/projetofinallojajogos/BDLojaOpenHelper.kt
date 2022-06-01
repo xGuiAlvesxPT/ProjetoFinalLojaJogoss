@@ -20,7 +20,7 @@ class BDLojaOpenHelper(
        TabelaFuncionarios(db).cria()
        TabelaVendas(db).cria()
        TabelaJogos(db).cria()
-       TabelaLinhaVenda(db).cria() 
+       TabelaLinhaVenda(db).cria()
 
 
     }
