@@ -3,12 +3,12 @@ import android.content.ContentValues
 import java.util.*
 
 data class Cliente(
-    val id: Long,
     var nome: String,
     var sexo: String,
     var nif: Int,
     var contacto: Int,
-    var data_de_nascimento: String
+    var data_de_nascimento: Long,
+    val id: Long
 ) {
 
     fun toContentValues():ContentValues{
