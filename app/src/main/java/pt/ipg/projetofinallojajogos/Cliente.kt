@@ -8,7 +8,7 @@ data class Cliente(
     var nif: Int,
     var contacto: Int,
     var data_de_nascimento: Long,
-    val id: Long
+    val id: Long = -1
 ) {
 
     fun toContentValues():ContentValues{

@@ -3,12 +3,12 @@ import android.content.ContentValues
 import java.util.*
 
 class LinhaVenda(
-    val id: Long,
     var quantidade: Int,
     var preco: Float,
     var percentagemIva: Float,
     var idjogo: Long,
-    var idvenda: Long
+    var idvenda: Long,
+    val id: Long = -1
 ) {
 
     fun toContentValues():ContentValues{
