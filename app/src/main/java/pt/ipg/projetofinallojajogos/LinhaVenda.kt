@@ -9,6 +9,7 @@ class LinhaVenda(
     var idjogo: Long,
     var idvenda: Long,
     val id: Long = -1
+
 ) {
 
     fun toContentValues():ContentValues{

@@ -3,13 +3,14 @@ import android.content.ContentValues
 import java.util.*
 
 data class Jogo(
-    val id: Long,
+
     var nome: String,
     var genero: String,
     var publicadora: String,
     var platadorma: String,
-    var preco: Int,
-    var data_de_lancamento: String
+    var preco: Float,
+    var data_de_lancamento: Long,
+    val id: Long = -1
 
 ) {
 
