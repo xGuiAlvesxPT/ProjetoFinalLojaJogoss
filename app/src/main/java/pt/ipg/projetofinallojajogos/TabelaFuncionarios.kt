@@ -4,11 +4,11 @@ package pt.ipg.projetofinallojajogos
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
-class TabelaFuncionarios(val db: SQLiteDatabase?) {
+class TabelaFuncionarios(val db: SQLiteDatabase) {
 
     fun cria (){
 
-        db?.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$NOME_FUNCIONARIO TEXT NOT NULL,$NIF_FUNCIONARIO INTEGER NOT NULL ,$CONTACTO INTEGER NOT NULL ,$DATA_DE_NASCIMENTO INTEGER NOT NULL) ")
+        db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$NOME_FUNCIONARIO TEXT NOT NULL,$NIF_FUNCIONARIO TEXT NOT NULL ,$CONTACTO TEXT NOT NULL ,$DATA_DE_NASCIMENTO INTEGER NOT NULL) ")
     }
 
     companion object{
