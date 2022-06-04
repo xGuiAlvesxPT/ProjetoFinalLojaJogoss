@@ -19,6 +19,7 @@ class BDLojaOpenHelper(
        TabelaClientes(db).cria()
        TabelaFuncionarios(db).cria()
        TabelaVendas(db).cria()
+       TabelaPlataformas(db).cria()
        TabelaJogos(db).cria()
        TabelaLinhaVenda(db).cria()
 
