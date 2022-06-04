@@ -20,61 +20,22 @@
 
     <TextView
         android:id="@+id/textViewGameStore"
-        android:layout_width="277dp"
-        android:layout_height="72dp"
+        android:layout_width="352dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="GAME STORE"
         android:textColor="#3F51B5"
-        android:textSize="34sp"
+        android:textSize="48sp"
         android:typeface="serif" />
-
-    <EditText
-        android:id="@+id/editTextUtilizador"
-        android:layout_width="367dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:autofillHints=""
-        android:drawableLeft="@drawable/ic_baseline_person_24"
-        android:ems="10"
-        android:gravity="left"
-        android:hint="Utilizador"
-        android:inputType="textShortMessage"
-        android:minHeight="48dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#000000"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck" />
-
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:drawableLeft="@drawable/ic_baseline_lock_open_24"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:textColorHint="#000000"
-        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="LOGIN"
+        android:text="ENTRAR"
         android:textColor="#000000"
         app:backgroundTint="#7FE15F"
         app:iconTint="#000000" />

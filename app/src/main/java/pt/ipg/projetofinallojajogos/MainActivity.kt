@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun entraGestao() {
 
-        val editTextUser = findViewById<EditText>(R.id.editTextUtilizador)
+        /*val editTextUser = findViewById<EditText>(R.id.editTextUtilizador)
 
         val username = editTextUser.text.toString()
         if (username != "admin") {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             editTextPassword.requestFocus()
             return
         }
-
+        */
 
 
         val intent = Intent(this, PaginaGestao::class.java)
