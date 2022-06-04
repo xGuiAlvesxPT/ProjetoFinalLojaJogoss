@@ -7,17 +7,17 @@ class TabelaJogos(val db: SQLiteDatabase) {
 
     fun cria (){
 
-        db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $NOME_JOGO TEXT NOT NULL, $GENERO TEXT NOT NULL,$PUBLICADORA TEXT NOT NULL,$PLATAFORMA TEXT NOT NULL,$PRECO REAL NOT NULL ,$DATA_DE_LANCAMENTO INTEGER NOT NULL) ")
+        db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $NOME_JOGO TEXT NOT NULL,$PUBLICADORA TEXT NOT NULL,$PRECO REAL NOT NULL ,$DATA_DE_LANCAMENTO INTEGER NOT NULL,$CAMPO_FK_PLATAFORMA INTEGER NOT NULL,$CAMPO_FK_GENERO INTEGER NOT NULL,FOREIGN KEY($CAMPO_FK_PLATAFORMA) REFERENCES ${TabelaPlataformas.NOME} (${BaseColumns._ID}) ON DELETE RESTRICT,FOREIGN KEY($CAMPO_FK_GENERO) REFERENCES ${TabelaGeneros.NOME} (${BaseColumns._ID}) ON DELETE RESTRICT) ")
     }
 
     companion object{
         const val NOME = "Jogos"
         const val NOME_JOGO = "Nome"
-        const val GENERO = "Genero"
         const val PUBLICADORA = "Publicadora"
-        const val PLATAFORMA= "Plataforma"
         const val PRECO= "Preco"
         const val DATA_DE_LANCAMENTO = "DatadeLancamento"
+        const val CAMPO_FK_PLATAFORMA = "idPlataforma"
+        const val CAMPO_FK_GENERO = "idGenero"
     }
 
 

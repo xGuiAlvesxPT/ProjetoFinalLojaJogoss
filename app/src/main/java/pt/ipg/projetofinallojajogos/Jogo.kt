@@ -5,12 +5,12 @@ import java.util.*
 data class Jogo(
 
     var nome: String,
-    var genero: String,
     var publicadora: String,
-    var platadorma: String,
     var preco: Float,
     var data_de_lancamento: Date,
-    val id: Long = -1
+    var idplataforma: Long,
+    var idgenero: Long,
+    val id: Long = -1,
 
 ) {
 
@@ -18,11 +18,11 @@ data class Jogo(
 
         val valores = ContentValues()
         valores.put(TabelaJogos.NOME_JOGO,nome)
-        valores.put(TabelaJogos.GENERO,genero)
         valores.put(TabelaJogos.PUBLICADORA,publicadora)
-        valores.put(TabelaJogos.PLATAFORMA,platadorma)
         valores.put(TabelaJogos.PRECO,preco)
         valores.put(TabelaJogos.DATA_DE_LANCAMENTO,data_de_lancamento.time)
+        valores.put(TabelaJogos.CAMPO_FK_PLATAFORMA,idplataforma)
+        valores.put(TabelaJogos.CAMPO_FK_GENERO,idgenero)
         return valores
     }
 
