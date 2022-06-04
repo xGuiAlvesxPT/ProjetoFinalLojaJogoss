@@ -9,7 +9,7 @@ data class Jogo(
     var publicadora: String,
     var platadorma: String,
     var preco: Float,
-    var data_de_lancamento: Long,
+    var data_de_lancamento: Date,
     val id: Long = -1
 
 ) {
@@ -22,7 +22,7 @@ data class Jogo(
         valores.put(TabelaJogos.PUBLICADORA,publicadora)
         valores.put(TabelaJogos.PLATAFORMA,platadorma)
         valores.put(TabelaJogos.PRECO,preco)
-        valores.put(TabelaJogos.DATA_DE_LANCAMENTO,data_de_lancamento)
+        valores.put(TabelaJogos.DATA_DE_LANCAMENTO,data_de_lancamento.time)
         return valores
     }
 
