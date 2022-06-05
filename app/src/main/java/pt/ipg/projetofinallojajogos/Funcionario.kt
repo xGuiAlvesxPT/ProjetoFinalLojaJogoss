@@ -6,8 +6,8 @@ data class Funcionario(
     var nome: String,
     var nif: String,
     var contacto: String,
-    var data_de_nascimento: Date,
-    val id: Long = -1
+    var data_de_nascimento: String,
+    var id: Long = -1
 
 ) {
 
@@ -17,7 +17,7 @@ data class Funcionario(
         valores.put(TabelaFuncionarios.NOME_FUNCIONARIO,nome)
         valores.put(TabelaFuncionarios.NIF_FUNCIONARIO,nif)
         valores.put(TabelaFuncionarios.CONTACTO,contacto)
-        valores.put(TabelaFuncionarios.DATA_DE_NASCIMENTO,data_de_nascimento.time)
+        valores.put(TabelaFuncionarios.DATA_DE_NASCIMENTO,data_de_nascimento)
         return valores
     }
 

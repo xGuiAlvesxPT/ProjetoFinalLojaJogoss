@@ -54,6 +54,11 @@ class BaseDeDadosTest {
         assertNotEquals(-1, Jogo.id)
     }
 
+    private fun insereFuncionario(db: SQLiteDatabase, Funcionario: Funcionario) {
+        Funcionario.id = TabelaFuncionarios(db).insert(Funcionario.toContentValues())
+        assertNotEquals(-1, Funcionario.id)
+    }
+
 
     @Before
     fun apagaBaseDados() {
@@ -109,23 +114,28 @@ class BaseDeDadosTest {
     fun consegueInserirJogo() {
         val db = getWritableDatabase()
 
-
         val jogo1 = Jogo("Grand Theft Auto 5","Take Two",30.99F,"17/09/2013",1,2)
         insereJogo(db, jogo1)
-
 
         val jogo2 = Jogo("Halo Wars","Microsoft",39.99F,"26/02/2009",2,3)
         insereJogo(db, jogo2)
 
-
         val jogo3 = Jogo("Legend Of Zelda","Nintendo",59.99F,"23/05/2020",3,1)
         insereJogo(db, jogo3)
 
-
-
-        db.isOpen()
+        db.close()
     }
 
+    @Test
+    fun consegueInserirFuncionario() {
+        val db = getWritableDatabase()
+
+        insereFuncionario(db, Funcionario("Jacinto Alves","548625789","150116278","22/10/2001"))
+        insereFuncionario(db, Funcionario("André Almeida","247954869","248524687","15/01/1987"))
+        insereFuncionario(db, Funcionario("Pedro Pires","789546578","254565278","03/12/1999"))
+
+        db.close()
+    }
 
 
 
