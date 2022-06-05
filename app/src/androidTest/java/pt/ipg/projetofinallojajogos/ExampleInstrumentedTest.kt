@@ -59,6 +59,16 @@ class BaseDeDadosTest {
         assertNotEquals(-1, Funcionario.id)
     }
 
+    private fun insereVenda(db: SQLiteDatabase, Venda: Venda) {
+        Venda.id = TabelaVendas(db).insert(Venda.toContentValues())
+        assertNotEquals(-1, Venda.id)
+    }
+
+    private fun insereLinhaVenda(db: SQLiteDatabase, LinhaVenda: LinhaVenda) {
+        LinhaVenda.id = TabelaLinhaVenda(db).insert(LinhaVenda.toContentValues())
+        assertNotEquals(-1, LinhaVenda.id)
+    }
+
 
     @Before
     fun apagaBaseDados() {
@@ -137,8 +147,26 @@ class BaseDeDadosTest {
         db.close()
     }
 
+    @Test
+    fun consegueInserirVenda() {
+        val db = getWritableDatabase()
 
+        insereVenda(db, Venda("21/10/2019",1,1))
+        insereVenda(db, Venda("10/11/2018",2,2))
+        insereVenda(db, Venda("12/02/2020",3,3))
 
+        db.close()
+    }
 
+    @Test
+    fun consegueInserirLinhaVenda() {
+        val db = getWritableDatabase()
+
+        insereLinhaVenda(db, LinhaVenda(2,61.98F,1,1))
+        insereLinhaVenda(db, LinhaVenda(3,119.97F,2,2))
+        insereLinhaVenda(db, LinhaVenda(4,239.96F,3,3))
+
+        db.close()
+    }
 
 }

@@ -7,7 +7,7 @@ class LinhaVenda(
     var preco: Float,
     var idjogo: Long,
     var idvenda: Long,
-    val id: Long = -1
+    var id: Long = -1
 
 ) {
 
