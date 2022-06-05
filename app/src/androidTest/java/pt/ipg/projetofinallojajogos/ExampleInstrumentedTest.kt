@@ -34,6 +34,13 @@ class BaseDeDadosTest {
         return openHelper.writableDatabase
     }
 
+    private fun insereGenero(db: SQLiteDatabase, Genero: Genero) {
+        Genero.id = TabelaGeneros(db).insert(Genero.toContentValues())
+        assertNotEquals(-1, Genero.id)
+    }
+
+
+
     @Before
     fun apagaBaseDados() {
         appContext().deleteDatabase(BDLojaOpenHelper.NOME)
@@ -49,7 +56,18 @@ class BaseDeDadosTest {
         db.close()
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    @Test
+    fun consegueInserirGenero() {
+        val db = getWritableDatabase()
+
+        insereGenero(db, Genero("Aventura"))
+        insereGenero(db, Genero("Açao"))
+        insereGenero(db, Genero("Estrategia"))
+
+        db.close()
+    }
 
 
 

@@ -3,9 +3,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
 
-class TabelaVendas(val db: SQLiteDatabase ){
+class TabelaVendas( db: SQLiteDatabase): TabelaBD(db, NOME){
 
-    fun cria (){
+   override fun cria (){
 
         db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $DATA_DE_VENDA INTEGER NOT NULL,$CAMPO_FK_CLIENTE INTEGER NOT NULL,$CAMPO_FK_FUNCIONARIO INTEGER NOT NULL,FOREIGN KEY($CAMPO_FK_CLIENTE) REFERENCES ${TabelaClientes.NOME} (${BaseColumns._ID}) ON DELETE RESTRICT,FOREIGN KEY($CAMPO_FK_FUNCIONARIO) REFERENCES ${TabelaFuncionarios.NOME} (${BaseColumns._ID}) ON DELETE RESTRICT) ")
     }

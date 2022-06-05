@@ -4,9 +4,9 @@ package pt.ipg.projetofinallojajogos
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
 
-class TabelaFuncionarios(val db: SQLiteDatabase) {
+class TabelaFuncionarios( db: SQLiteDatabase): TabelaBD(db, NOME) {
 
-    fun cria (){
+   override fun cria (){
 
         db.execSQL("CREATE TABLE $NOME (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,$NOME_FUNCIONARIO TEXT NOT NULL,$NIF_FUNCIONARIO TEXT NOT NULL ,$CONTACTO TEXT NOT NULL ,$DATA_DE_NASCIMENTO INTEGER NOT NULL) ")
     }
