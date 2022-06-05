@@ -39,6 +39,11 @@ class BaseDeDadosTest {
         assertNotEquals(-1, Genero.id)
     }
 
+    private fun inserePlataforma(db: SQLiteDatabase, Plataforma: Plataforma) {
+        Plataforma.id = TabelaPlataformas(db).insert(Plataforma.toContentValues())
+        assertNotEquals(-1, Plataforma.id)
+    }
+
 
 
     @Before
@@ -69,6 +74,16 @@ class BaseDeDadosTest {
         db.close()
     }
 
+    @Test
+    fun consegueInserirPlataforma() {
+        val db = getWritableDatabase()
+
+        inserePlataforma(db, Plataforma("Playstation 3"))
+        inserePlataforma(db, Plataforma("Xbox 360"))
+        inserePlataforma(db, Plataforma("Nintendo 3DS"))
+
+        db.close()
+    }
 
 
 

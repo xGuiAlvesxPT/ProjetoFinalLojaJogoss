@@ -4,7 +4,7 @@ import java.util.*
 
 data class Plataforma(
     var nome: String,
-    val id: Long = -1
+    var id: Long = -1
 ) {
 
     fun toContentValues():ContentValues{
