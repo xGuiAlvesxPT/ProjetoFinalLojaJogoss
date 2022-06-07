@@ -1,6 +1,7 @@
 package pt.ipg.projetofinallojajogos
 
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
@@ -69,6 +70,7 @@ class BaseDeDadosTest {
         assertNotEquals(-1, LinhaVenda.id)
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Before
     fun apagaBaseDados() {
@@ -165,6 +167,28 @@ class BaseDeDadosTest {
         insereLinhaVenda(db, LinhaVenda(2,61.98F,1,1))
         insereLinhaVenda(db, LinhaVenda(3,119.97F,2,2))
         insereLinhaVenda(db, LinhaVenda(4,239.96F,3,3))
+
+        db.close()
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Test
+    fun consegueAlterarPlataforma() {
+        val db = getWritableDatabase()
+
+        val plataforma = Plataforma("Playstation 2")
+        inserePlataforma(db, plataforma)
+
+        plataforma.nome = "Xbox One"
+
+        val registosAlterados = TabelaPlataformas(db).update(
+            plataforma.toContentValues(),
+            "${BaseColumns._ID}=?",
+            arrayOf("${plataforma.id}"))
+
+        assertEquals(1, registosAlterados)
 
         db.close()
     }
