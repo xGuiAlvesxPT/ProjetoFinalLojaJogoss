@@ -1,5 +1,7 @@
 package pt.ipg.projetofinallojajogos
 import android.content.ContentValues
+import android.database.Cursor
+import android.provider.BaseColumns
 import java.util.*
 
 data class Genero(
@@ -13,6 +15,18 @@ data class Genero(
         valores.put(TabelaGeneros.NOME_GENERO,nome)
 
         return valores
+    }
+
+    companion object {
+        fun fromCursor(cursor: Cursor): Genero {
+            val posId = cursor.getColumnIndex(BaseColumns._ID)
+            val posNome = cursor.getColumnIndex(TabelaGeneros.NOME_GENERO)
+
+            val id = cursor.getLong(posId)
+            val nome = cursor.getString(posNome)
+
+            return Genero(nome, id)
+        }
     }
 
 }
