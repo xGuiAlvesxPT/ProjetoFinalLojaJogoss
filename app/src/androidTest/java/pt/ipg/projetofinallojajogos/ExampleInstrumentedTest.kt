@@ -193,4 +193,20 @@ class BaseDeDadosTest {
         db.close()
     }
 
+    @Test
+    fun consegueEliminarPlataforma() {
+        val db = getWritableDatabase()
+
+        val plataforma = Plataforma("Xbox 360")
+        inserePlataforma(db, plataforma)
+
+        val registosEliminados = TabelaPlataformas(db).delete(
+            "${BaseColumns._ID}=?",
+            arrayOf("${plataforma.id}"))
+
+        assertEquals(1, registosEliminados)
+
+        db.close()
+    }
+
 }
