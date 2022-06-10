@@ -115,9 +115,9 @@ class BaseDeDadosTest {
     fun consegueInserirCliente() {
         val db = getWritableDatabase()
 
-        insereCliente(db, Cliente("Guilherme Alves",'M',"250116278","963355065","22/10/2000"))
-        insereCliente(db, Cliente("Maria Almeida",'F',"258524687","954798855","15/01/1950"))
-        insereCliente(db, Cliente("Joao Pires",'M',"254566278","9745354789","03/12/1987"))
+        insereCliente(db, Cliente("Guilherme Alves","Masculino","250116278","963355065","22/10/2000"))
+        insereCliente(db, Cliente("Maria Almeida","Feminino","258524687","954798855","15/01/1950"))
+        insereCliente(db, Cliente("Joao Pires","Masculino","254566278","9745354789","03/12/1987"))
 
         db.close()
     }
