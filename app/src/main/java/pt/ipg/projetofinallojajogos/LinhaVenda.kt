@@ -1,5 +1,7 @@
 package pt.ipg.projetofinallojajogos
 import android.content.ContentValues
+import android.database.Cursor
+import android.provider.BaseColumns
 import java.util.*
 
 class LinhaVenda(
@@ -19,5 +21,23 @@ class LinhaVenda(
         valores.put(TabelaLinhaVenda.CAMPO_FK_JOGOS,idjogo)
         valores.put(TabelaLinhaVenda.CAMPO_FK_VENDA,idvenda)
         return valores
+    }
+
+    companion object {
+        fun fromCursor(cursor: Cursor): LinhaVenda {
+            val posId = cursor.getColumnIndex(BaseColumns._ID)
+            val posQuantidade = cursor.getColumnIndex(TabelaLinhaVenda.QUANTIDADE)
+            val posPreco = cursor.getColumnIndex(TabelaLinhaVenda.PRECO)
+            val posIdJogo = cursor.getColumnIndex(TabelaLinhaVenda.CAMPO_FK_JOGOS)
+            val posIdVenda = cursor.getColumnIndex(TabelaLinhaVenda.CAMPO_FK_VENDA)
+
+            val id = cursor.getLong(posId)
+            val quantidade = cursor.getInt(posQuantidade)
+            val preco = cursor.getFloat(posPreco)
+            val idJogo = cursor.getLong(posIdJogo)
+            val idVenda = cursor.getLong(posIdVenda)
+
+            return LinhaVenda(quantidade,preco,idJogo,idVenda, id)
+        }
     }
 }
