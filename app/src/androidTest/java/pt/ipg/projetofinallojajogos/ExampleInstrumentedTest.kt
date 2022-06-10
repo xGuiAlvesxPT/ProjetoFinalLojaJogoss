@@ -209,4 +209,30 @@ class BaseDeDadosTest {
         db.close()
     }
 
+    @Test
+    fun consegueLerPlataformas() {
+        val db = getWritableDatabase()
+
+        val plataforma = Plataforma("PSP")
+        inserePlataforma(db, plataforma)
+
+        val cursor = TabelaPlataformas(db).query(
+            TabelaPlataformas.TODAS_COLUNAS,
+            "${BaseColumns._ID}=?",
+            arrayOf("${plataforma.id}"),
+            null,
+            null,
+            null
+        )
+
+        assertEquals(1, cursor.count)
+        assertTrue(cursor.moveToNext())
+
+        val plataformaBD = Plataforma.fromCursor(cursor)
+
+        assertEquals(plataforma,plataformaBD)
+
+        db.close()
+    }
+
 }

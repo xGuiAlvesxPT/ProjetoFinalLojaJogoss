@@ -13,7 +13,9 @@ class TabelaGeneros( db: SQLiteDatabase): TabelaBD(db, NOME) {
     companion object{
         const val NOME = "Genero"
         const val NOME_GENERO = "Nome"
+        val TODAS_COLUNAS = arrayOf(BaseColumns._ID, NOME_GENERO)
 
     }
+
 
 }

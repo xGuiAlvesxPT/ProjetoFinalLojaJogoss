@@ -15,6 +15,9 @@ class TabelaLinhaVenda( db: SQLiteDatabase): TabelaBD(db, NOME) {
         const val PRECO = "Preco"
         const val CAMPO_FK_VENDA = "idVenda"
         const val CAMPO_FK_JOGOS = "idJogo"
+        val TODAS_COLUNAS = arrayOf(BaseColumns._ID, QUANTIDADE, PRECO, CAMPO_FK_VENDA, CAMPO_FK_JOGOS)
     }
+
+
 
 }

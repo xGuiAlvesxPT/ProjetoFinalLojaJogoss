@@ -17,6 +17,10 @@ class TabelaClientes( db: SQLiteDatabase): TabelaBD(db, NOME) {
         const val NIF_CLIENTE = "Nif"
         const val CONTACTO= "Contacto"
         const val DATA_DE_NASCIMENTO = "DatadeNascimento"
+        val TODAS_COLUNAS = arrayOf(BaseColumns._ID, NOME_CLIENTE, SEXO, NIF_CLIENTE, CONTACTO,
+            DATA_DE_NASCIMENTO)
     }
+
+
 
 }
