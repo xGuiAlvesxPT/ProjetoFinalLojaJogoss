@@ -1,5 +1,7 @@
 package pt.ipg.projetofinallojajogos
 import android.content.ContentValues
+import android.database.Cursor
+import android.provider.BaseColumns
 import java.util.*
 
 data class Jogo(
@@ -26,5 +28,26 @@ data class Jogo(
         return valores
     }
 
+    companion object {
+        fun fromCursor(cursor: Cursor): Jogo {
+            val posId = cursor.getColumnIndex(BaseColumns._ID)
+            val posNome = cursor.getColumnIndex(TabelaJogos.NOME_JOGO)
+            val posPublicadora = cursor.getColumnIndex(TabelaJogos.PUBLICADORA)
+            val posPreco = cursor.getColumnIndex(TabelaJogos.PRECO)
+            val posDataLancamento = cursor.getColumnIndex(TabelaJogos.DATA_DE_LANCAMENTO)
+            val posIdPlataforma = cursor.getColumnIndex(TabelaJogos.CAMPO_FK_PLATAFORMA)
+            val posIdGenero = cursor.getColumnIndex(TabelaJogos.CAMPO_FK_GENERO)
+
+            val id = cursor.getLong(posId)
+            val nome = cursor.getString(posNome)
+            val publicadora = cursor.getString(posPublicadora)
+            val preco = cursor.getFloat(posPreco)
+            val dataLancamento = cursor.getString(posDataLancamento)
+            val idPlataforma = cursor.getLong(posIdPlataforma)
+            val idGenero = cursor.getLong(posIdGenero)
+
+            return Jogo(nome, publicadora, preco,dataLancamento,idPlataforma,idGenero, id)
+        }
+    }
 
 }
