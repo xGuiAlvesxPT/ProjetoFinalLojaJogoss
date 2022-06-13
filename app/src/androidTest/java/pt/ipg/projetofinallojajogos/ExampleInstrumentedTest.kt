@@ -45,6 +45,11 @@ class BaseDeDadosTest {
         assertNotEquals(-1, Plataforma.id)
     }
 
+    private fun insereSexo(db: SQLiteDatabase, Sexo: Sexo) {
+        Sexo.id = TabelaSexo(db).insert(Sexo.toContentValues())
+        assertNotEquals(-1, Sexo.id)
+    }
+
     private fun insereCliente(db: SQLiteDatabase, Cliente: Cliente) {
         Cliente.id = TabelaClientes(db).insert(Cliente.toContentValues())
         assertNotEquals(-1, Cliente.id)
@@ -112,12 +117,27 @@ class BaseDeDadosTest {
     }
 
     @Test
+    fun consegueInserirSexo() {
+        val db = getWritableDatabase()
+
+        insereSexo(db, Sexo("Masculino"))
+        insereSexo(db, Sexo("Feminino"))
+
+        db.close()
+    }
+
+    @Test
     fun consegueInserirCliente() {
         val db = getWritableDatabase()
 
-        insereCliente(db, Cliente("Guilherme Alves","Masculino","250116278","963355065","22/10/2000"))
-        insereCliente(db, Cliente("Maria Almeida","Feminino","258524687","954798855","15/01/1950"))
-        insereCliente(db, Cliente("Joao Pires","Masculino","254566278","9745354789","03/12/1987"))
+        val sexoM = Sexo("Masculino")
+        insereSexo(db,sexoM)
+        val sexoF = Sexo("Feminino")
+        insereSexo(db,sexoF)
+
+        insereCliente(db, Cliente("Guilherme Alves","250116278","963355065","22/10/2000",sexoM.id))
+        insereCliente(db, Cliente("Maria Almeida","258524687","954798855","15/01/1950",sexoF.id))
+        insereCliente(db, Cliente("Joao Pires","254566278","9745354789","03/12/1987",sexoM.id))
 
         db.close()
     }
