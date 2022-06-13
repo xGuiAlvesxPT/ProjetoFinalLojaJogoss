@@ -213,29 +213,35 @@ class ContentProviderLojaJogos : ContentProvider() {
     companion object {
         const val AUTHORITY = "pt.ipg.projetofinallojajogos"
 
-        const val URI_CLIENTE = 100
-        const val URI_CLIENTE_ESPECIFICO = 101
+        const val URI_SEXO = 100
+        const val URI_SEXO_ESPECIFICO = 101
 
-        const val URI_FUNCIONARIO = 200
-        const val URI_FUNCIONARIO_ESPECIFICO = 201
+        const val URI_CLIENTE = 200
+        const val URI_CLIENTE_ESPECIFICO = 201
 
-        const val URI_GENERO = 300
-        const val URI_GENERO_ESPECIFICO = 301
+        const val URI_FUNCIONARIO = 300
+        const val URI_FUNCIONARIO_ESPECIFICO = 301
 
-        const val URI_JOGO = 400
-        const val URI_JOGO_ESPECIFICO = 401
+        const val URI_GENERO = 400
+        const val URI_GENERO_ESPECIFICO = 401
 
-        const val URI_LINHA_VENDA = 500
-        const val URI_LINHA_VENDA_ESPECIFICO = 501
+        const val URI_JOGO = 500
+        const val URI_JOGO_ESPECIFICO = 501
 
-        const val URI_PLATAFORMA = 600
-        const val URI_PLATAFORMA_ESPECIFICA = 601
+        const val URI_LINHA_VENDA = 600
+        const val URI_LINHA_VENDA_ESPECIFICO = 601
 
-        const val URI_VENDA = 700
-        const val URI_VENDA_ESPECIFICA = 701
+        const val URI_PLATAFORMA = 700
+        const val URI_PLATAFORMA_ESPECIFICA = 701
+
+        const val URI_VENDA = 800
+        const val URI_VENDA_ESPECIFICA = 801
 
         fun getUriMatcher() : UriMatcher {
             var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
+
+            uriMatcher.addURI(AUTHORITY, TabelaSexo.NOME, URI_SEXO)
+            uriMatcher.addURI(AUTHORITY, "${TabelaSexo.NOME}/#", URI_SEXO_ESPECIFICO)
 
             uriMatcher.addURI(AUTHORITY, TabelaClientes.NOME, URI_CLIENTE)
             uriMatcher.addURI(AUTHORITY, "${TabelaClientes.NOME}/#", URI_CLIENTE_ESPECIFICO)
@@ -254,6 +260,9 @@ class ContentProviderLojaJogos : ContentProvider() {
 
             uriMatcher.addURI(AUTHORITY, TabelaPlataformas.NOME, URI_PLATAFORMA)
             uriMatcher.addURI(AUTHORITY, "${TabelaPlataformas.NOME}/#", URI_PLATAFORMA_ESPECIFICA)
+
+            uriMatcher.addURI(AUTHORITY, TabelaVendas.NOME, URI_VENDA)
+            uriMatcher.addURI(AUTHORITY, "${TabelaVendas.NOME}/#", URI_VENDA_ESPECIFICA)
 
             return uriMatcher
         }
