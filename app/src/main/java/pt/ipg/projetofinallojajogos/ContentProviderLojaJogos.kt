@@ -265,6 +265,7 @@ class ContentProviderLojaJogos : ContentProvider() {
             uriMatcher.addURI(AUTHORITY, "${TabelaVendas.NOME}/#", URI_VENDA_ESPECIFICA)
 
             return uriMatcher
+            //ola
         }
     }
 }
