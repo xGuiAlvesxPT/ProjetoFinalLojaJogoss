@@ -6,9 +6,10 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.database.sqlite.SQLiteOpenHelper
 import android.net.Uri
+import android.provider.BaseColumns
 
 class ContentProviderLojaJogos : ContentProvider() {
-    var db : BDLojaOpenHelper? = null
+    var dbOpenHelper : BDLojaOpenHelper? = null
 
     /**
      * Implement this to initialize your content provider on startup.
@@ -38,7 +39,7 @@ class ContentProviderLojaJogos : ContentProvider() {
      * @return true if the provider was successfully loaded, false otherwise
      */
     override fun onCreate(): Boolean {
-        db = BDLojaOpenHelper(context)
+        dbOpenHelper = BDLojaOpenHelper(context)
 
         return true
     }
@@ -117,7 +118,43 @@ class ContentProviderLojaJogos : ContentProvider() {
         selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
-        TODO("Not yet implemented")
+        val db = dbOpenHelper!!.readableDatabase
+
+
+        requireNotNull(selection)
+        requireNotNull(projection)
+        val colunas = projection as Array<String>
+
+        val argsSeleccao = selectionArgs as Array<String>
+
+
+        val id = uri.lastPathSegment
+
+        val cursor = when (getUriMatcher().match(uri)) {
+            URI_CLIENTE -> TabelaClientes(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_FUNCIONARIO -> TabelaFuncionarios(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_GENERO -> TabelaGeneros(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_PLATAFORMA -> TabelaPlataformas(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_SEXO -> TabelaSexo(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_LINHA_VENDA -> TabelaLinhaVenda(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_VENDA -> TabelaVendas(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_JOGO -> TabelaJogos(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+
+
+            URI_CLIENTE_ESPECIFICO -> TabelaClientes(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_FUNCIONARIO_ESPECIFICO -> TabelaFuncionarios(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_GENERO_ESPECIFICO -> TabelaGeneros(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_PLATAFORMA_ESPECIFICA -> TabelaPlataformas(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_SEXO_ESPECIFICO -> TabelaSexo(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_LINHA_VENDA_ESPECIFICO -> TabelaLinhaVenda(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_VENDA_ESPECIFICA -> TabelaVendas(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_JOGO_ESPECIFICO -> TabelaJogos(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            else -> null
+        }
+
+        db.close()
+
+        return cursor
     }
 
     /**
@@ -139,10 +176,29 @@ class ContentProviderLojaJogos : ContentProvider() {
      * @param uri the URI to query.
      * @return a MIME type string, or `null` if there is no type.
      */
-    override fun getType(uri: Uri): String? {
-        TODO("Not yet implemented")
-    }
+    override fun getType(uri: Uri): String? =
+        when (getUriMatcher().match(uri)) {
 
+            URI_CLIENTE -> "$MULTIPLOS_REGISTOS/${TabelaClientes.NOME}"
+            URI_FUNCIONARIO -> "$MULTIPLOS_REGISTOS/${TabelaFuncionarios.NOME}"
+            URI_GENERO -> "$MULTIPLOS_REGISTOS/${TabelaGeneros.NOME}"
+            URI_PLATAFORMA -> "$MULTIPLOS_REGISTOS/${TabelaPlataformas.NOME}"
+            URI_JOGO -> "$MULTIPLOS_REGISTOS/${TabelaJogos.NOME}"
+            URI_SEXO -> "$MULTIPLOS_REGISTOS/${TabelaSexo.NOME}"
+            URI_VENDA -> "$MULTIPLOS_REGISTOS/${TabelaVendas.NOME}"
+            URI_LINHA_VENDA -> "$MULTIPLOS_REGISTOS/${TabelaLinhaVenda.NOME}"
+
+            URI_CLIENTE_ESPECIFICO -> "$UNICO_REGISTO/${TabelaClientes.NOME}"
+            URI_FUNCIONARIO_ESPECIFICO -> "$UNICO_REGISTO/${TabelaFuncionarios.NOME}"
+            URI_GENERO_ESPECIFICO -> "$UNICO_REGISTO/${TabelaGeneros.NOME}"
+            URI_PLATAFORMA_ESPECIFICA -> "$UNICO_REGISTO/${TabelaPlataformas.NOME}"
+            URI_JOGO_ESPECIFICO -> "$UNICO_REGISTO/${TabelaJogos.NOME}"
+            URI_SEXO_ESPECIFICO -> "$UNICO_REGISTO/${TabelaSexo.NOME}"
+            URI_VENDA_ESPECIFICA -> "$UNICO_REGISTO/${TabelaVendas.NOME}"
+            URI_LINHA_VENDA_ESPECIFICO -> "$UNICO_REGISTO/${TabelaLinhaVenda.NOME}"
+
+            else -> null
+        }
     /**
      * Implement this to handle requests to insert a new row. As a courtesy,
      * call
@@ -156,7 +212,28 @@ class ContentProviderLojaJogos : ContentProvider() {
      * @return The URI for the newly inserted item.
      */
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        TODO("Not yet implemented")
+        val db = dbOpenHelper!!.writableDatabase
+
+        requireNotNull(values)
+
+        val id = when (getUriMatcher().match(uri)) {
+            URI_CLIENTE -> TabelaClientes(db).insert(values)
+            URI_FUNCIONARIO -> TabelaFuncionarios(db).insert(values)
+            URI_GENERO -> TabelaGeneros(db).insert(values)
+            URI_PLATAFORMA -> TabelaPlataformas(db).insert(values)
+            URI_JOGO -> TabelaJogos(db).insert(values)
+            URI_VENDA -> TabelaVendas(db).insert(values)
+            URI_LINHA_VENDA -> TabelaLinhaVenda(db).insert(values)
+            URI_SEXO -> TabelaSexo(db).insert(values)
+
+            else -> -1
+        }
+
+        db.close()
+
+        if (id == -1L) return null
+
+        return Uri.withAppendedPath(uri, "$id")
     }
 
     /**
@@ -183,7 +260,25 @@ class ContentProviderLojaJogos : ContentProvider() {
      * @throws SQLException
      */
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
-        TODO("Not yet implemented")
+        val db = dbOpenHelper!!.writableDatabase
+
+        val id = uri.lastPathSegment
+
+        val registosApagados = when (getUriMatcher().match(uri)) {
+            URI_CLIENTE_ESPECIFICO -> TabelaClientes(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_FUNCIONARIO_ESPECIFICO -> TabelaFuncionarios(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_GENERO_ESPECIFICO -> TabelaGeneros(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_PLATAFORMA_ESPECIFICA -> TabelaPlataformas(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_SEXO_ESPECIFICO -> TabelaSexo(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_LINHA_VENDA_ESPECIFICO -> TabelaLinhaVenda(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_VENDA_ESPECIFICA -> TabelaVendas(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_JOGO_ESPECIFICO -> TabelaJogos(db).delete("${BaseColumns._ID}=?", arrayOf("${id}"))
+            else -> 0
+        }
+
+        db.close()
+
+        return registosApagados
     }
 
     /**
@@ -207,7 +302,27 @@ class ContentProviderLojaJogos : ContentProvider() {
         selection: String?,
         selectionArgs: Array<out String>?
     ): Int {
-        TODO("Not yet implemented")
+        requireNotNull(values)
+
+        val db = dbOpenHelper!!.writableDatabase
+
+        val id = uri.lastPathSegment
+
+        val registosAlterados = when (getUriMatcher().match(uri)) {
+            URI_CLIENTE_ESPECIFICO -> TabelaClientes(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_FUNCIONARIO_ESPECIFICO -> TabelaFuncionarios(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_GENERO_ESPECIFICO -> TabelaGeneros(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_PLATAFORMA_ESPECIFICA -> TabelaPlataformas(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_SEXO_ESPECIFICO -> TabelaSexo(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_LINHA_VENDA_ESPECIFICO -> TabelaLinhaVenda(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_VENDA_ESPECIFICA -> TabelaVendas(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            URI_JOGO_ESPECIFICO -> TabelaJogos(db).update(values,"${BaseColumns._ID}=?", arrayOf("${id}"))
+            else -> 0
+        }
+
+        db.close()
+
+        return registosAlterados
     }
 
     companion object {
@@ -236,6 +351,9 @@ class ContentProviderLojaJogos : ContentProvider() {
 
         const val URI_VENDA = 800
         const val URI_VENDA_ESPECIFICA = 801
+
+        const val UNICO_REGISTO = "vnd.android.cursor.item"
+        const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
 
         fun getUriMatcher() : UriMatcher {
             var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
